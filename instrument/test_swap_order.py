@@ -15,7 +15,7 @@ from pathlib import Path
 
 sys.path.insert(0, str(Path(__file__).resolve().parent.parent))
 
-from env import auto_load_env  # noqa: E402
+from annotations.env import auto_load_env  # noqa: E402
 from client import OKXClient  # noqa: E402
 
 

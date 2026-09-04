@@ -15,7 +15,7 @@
     asyncio.run(main())
 """
 
-from env import auto_load_env, load_dotenv
+from annotations.env import auto_load_env, load_dotenv
 from instrument.order import OKXTrader, spot_instrument, swap_instrument
 
 __all__ = [

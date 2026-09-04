@@ -1,20 +1,3 @@
-"""最外侧的环境变量加载与 ``main`` 启动钩子。
-
-提供 ``load_dotenv`` 读取 ``quant_learn/.env`` 到 ``os.environ``，以及
-``auto_load_env`` 装饰器：把它挂到最外侧脚本的 ``main`` 上，``main`` 执行时
-会自动加载 ``.env``（无需在函数体里手动调用）。
-
-用法::
-
-    from env import auto_load_env
-
-    @auto_load_env
-    async def main():
-        ...
-
-    asyncio.run(main())
-"""
-
 from __future__ import annotations
 
 import inspect
@@ -23,8 +6,8 @@ from functools import wraps
 from pathlib import Path
 from typing import Any, Callable, TypeVar, cast
 
-# 默认 .env 位置：quant_learn/.env（本文件位于 quant_learn/env.py）
-DEFAULT_ENV_PATH = Path(__file__).resolve().parent / ".env"
+# .env 位于仓库根目录（annotations 的上一级），故用 parent.parent 定位
+DEFAULT_ENV_PATH = Path(__file__).resolve().parent.parent / ".env"
 
 _F = TypeVar("_F", bound=Callable[..., Any])
 
@@ -49,18 +32,6 @@ def load_dotenv(path: Path | None = None) -> None:
 
 
 def auto_load_env(func: _F) -> _F:
-    """装饰器：在 ``main`` 函数执行时自动加载 .env（同步 / 异步均支持）。
-
-    用法::
-
-        from env import auto_load_env
-
-        @auto_load_env
-        async def main():
-            ...
-
-        asyncio.run(main())
-    """
     if inspect.iscoroutinefunction(func):
 
         @wraps(func)

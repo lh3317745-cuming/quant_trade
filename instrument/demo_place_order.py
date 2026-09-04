@@ -19,7 +19,7 @@ from pathlib import Path
 # 保证可从任意工作目录导入 instrument 包
 sys.path.insert(0, str(Path(__file__).resolve().parent.parent))
 
-from env import auto_load_env  # noqa: E402
+from annotations.env import auto_load_env  # noqa: E402
 from client import OKXClient  # noqa: E402
 
 

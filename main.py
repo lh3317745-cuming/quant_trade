@@ -5,7 +5,7 @@ from typing import Any
 from nautilus_trader.model import AccountId
 
 from client import OKXClient, parse_amount
-from env import auto_load_env
+from annotations.env import auto_load_env
 
 
 ACCOUNT_ID = AccountId.from_str("OKX-001")
